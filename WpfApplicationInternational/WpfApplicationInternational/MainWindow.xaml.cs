@@ -37,11 +37,15 @@ namespace WpfApplicationInternational
             LocalizeDictionary.Instance.Culture= LocalizeDictionary.Instance.Culture.Equals(EnglandCultureInfo) 
                 ? GermanyCultureInfo
                 : EnglandCultureInfo;
-            var messageText = (string)LocalizeDictionary.Instance.GetLocalizedObject("WpfApplicationInternational", "Resources", "Message",
-                LocalizeDictionary.CurrentCulture);
+            var messageText =GetLocalizedObject<string>("Message",LocalizeDictionary.CurrentCulture);
             MessageBox.Show(messageText);
         }
 
-        
+        private static T GetLocalizedObject<T>(string key, CultureInfo culture, string assembly= "WpfApplicationInternational",string resources= "Resources")
+        {
+            return (T)LocalizeDictionary.Instance.GetLocalizedObject(assembly, resources, key, culture);
+        }
+
+
     }
 }
