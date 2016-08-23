@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFLocalizeExtension.Engine;
 
 namespace WpfApplicationInternational
 {
@@ -20,9 +22,26 @@ namespace WpfApplicationInternational
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly CultureInfo EnglandCultureInfo =
+            CultureInfo.GetCultureInfo("en-GB");
+        private static readonly CultureInfo GermanyCultureInfo =
+            CultureInfo.GetCultureInfo("de-DE");
         public MainWindow()
         {
             InitializeComponent();
+            LocalizeDictionary.Instance.Culture = EnglandCultureInfo;
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            LocalizeDictionary.Instance.Culture= LocalizeDictionary.Instance.Culture.Equals(EnglandCultureInfo) 
+                ? GermanyCultureInfo
+                : EnglandCultureInfo;
+            var messageText = (string)LocalizeDictionary.Instance.GetLocalizedObject("WpfApplicationInternational", "Resources", "Message",
+                LocalizeDictionary.CurrentCulture);
+            MessageBox.Show(messageText);
+        }
+
+        
     }
 }

@@ -4,9 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplicationInternational"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"    
+        lex:ResxLocalizationProvider.DefaultAssembly="WpfApplicationInternational"    
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="{lex:Loc Key=Title}" Height="350" Width="350">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label FontSize="48"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               Content="{lex:Loc Key=Label}"/>
+        <Button Grid.Row="1"
+                Height="60"
+                Width="200"
+                Content="{lex:Loc Key=ButtonText}"
+                Click="ButtonBase_OnClick"/>
     </Grid>
 </Window>
